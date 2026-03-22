@@ -1,5 +1,3 @@
-import Card from "../layout/Card";
-
 const Home = () => {
     return (
         <div className="relative flex flex-col justify-center items-center font-gilroy-md text-charcoal bg-linear-to-t from-white to-violet-400 h-screen p-10">
@@ -45,7 +43,7 @@ const Home = () => {
                 strokeWidth="1"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-violet-500 absolute left-10 bottom-0 cursor-pointer hover:scale-110"
+                className="text-violet-500 absolute left-10 bottom-0 cursor-pointer hover:scale-110 transition-all duration-300"
             >
                 <path d="M13 5H19V11" />
                 <path d="M19 5L5 19" />
