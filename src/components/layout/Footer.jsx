@@ -13,7 +13,7 @@ const Footer = (prop) => {
 
     return (
         <div
-            className={`w-full text-white h-40 flex pl-8 pr-8 justify-evenly items-center bg-charcoal rounded-t-2xl shadow-[5px_3px_15px_rgba(0,0,0,0.3)] hover:shadow-violet-300 transition-all duration-300 ease-in-out bottom-0 ${prop.className}`}
+            className={`w-full text-white h-auto py-10 flex pl-8 pr-8 justify-evenly items-center bg-charcoal rounded-t-2xl shadow-[5px_3px_15px_rgba(0,0,0,0.3)] hover:shadow-violet-300 transition-all duration-300 ease-in-out ${prop.className}`}
         >
             {footerItems.map((item, idx) => {
                 const keys = Object.keys(item);
