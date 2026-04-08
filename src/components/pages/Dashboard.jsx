@@ -12,7 +12,6 @@ const Dashboard = () => {
 
   const [filter, setFilter] = useState("All");
 
-  // 🧮 Calculations
   let totalIncome = 0;
   let totalExpenses = 0;
 
@@ -26,7 +25,6 @@ const Dashboard = () => {
   const savingsRate =
     totalIncome === 0 ? 0 : Math.round((remainingBudget / totalIncome) * 100);
 
-  // ➕ Add Transaction
   const handleAddTransaction = () => {
     if (!trans.name || !trans.amount || !trans.category) return;
 
@@ -53,36 +51,39 @@ const Dashboard = () => {
     });
   };
 
-  // 🔍 Filter (ONLY type-based)
   const filteredTransactions =
     filter === "All"
       ? transactions
       : transactions.filter((t) => t.type === filter.toLowerCase());
 
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className="flex flex-col justify-start items-start bg-amber-50 h-screen font-gilroy">
+      <h1 className="text-3xl text-violet-400 self-start ml-5 mt-5 font-gilroy-bold underline">
+        Dashboard
+      </h1>
 
       {/* SUMMARY */}
-      <div>
-        <div>
-          <h3>Total Income</h3>
-          <h2>{totalIncome}</h2>
+      <div className="ml-10 mt-10 flex flex-col gap-3">
+        <div className="flex justify-between gap-10">
+          <h3 className="text-amber-600 font-bold text-2xl">Total Income</h3>
+          <h2 className="badge badge-dash p-4">{totalIncome}</h2>
         </div>
 
-        <div>
-          <h3>Total Expenses</h3>
-          <h2>{totalExpenses}</h2>
+        <div className="flex justify-between gap-10">
+          <h3 className="text-amber-600 font-bold text-2xl">Total Expenses</h3>
+          <h2 className="badge badge-dash p-4">{totalExpenses}</h2>
         </div>
 
-        <div>
-          <h3>Remaining Budget</h3>
-          <h2>{remainingBudget}</h2>
+        <div className="flex justify-between gap-10">
+          <h3 className="text-amber-600 font-bold text-2xl">
+            Remaining Budget
+          </h3>
+          <h2 className="badge badge-dash p-4">{remainingBudget}</h2>
         </div>
 
-        <div>
-          <h3>Savings Rate</h3>
-          <h2>{savingsRate}%</h2>
+        <div className="flex justify-between gap-10">
+          <h3 className="text-amber-600 font-bold text-2xl">Savings Rate</h3>
+          <h2 className="badge badge-dash p-4">{savingsRate}%</h2>
         </div>
       </div>
 
