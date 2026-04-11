@@ -6,6 +6,7 @@ import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
 import Login from "./components/pages/Login";
 import ComingSoon from "./components/pages/ComingSoon";
+import MonthlyExpenses from "./components/pages/MonthlyExpenses";
 import Page from "./components/layout/Page";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/coming-soon" element={<ComingSoon />} />
+                <Route path="/monthly-expenses" element={<MonthlyExpenses />} />
             </Routes>
         </Page>
     );

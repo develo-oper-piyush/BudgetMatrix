@@ -12,6 +12,9 @@ const Navbar = () => {
             <NavLink className={navLinkClass} to="/dashboard">
                 Dashboard
             </NavLink>
+            <NavLink className={navLinkClass} to="/monthly-expenses">
+                Monthly Expenses
+            </NavLink>
             <NavLink className={navLinkClass} to="/about">
                 About Us
             </NavLink>

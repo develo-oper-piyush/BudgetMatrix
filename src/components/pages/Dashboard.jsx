@@ -132,15 +132,15 @@ const Dashboard = () => {
                 <section className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <SummaryCard
                         title="Total Income"
-                        value={`$${totalIncome.toFixed(2)}`}
+                        value={`₹${totalIncome.toFixed(2)}`}
                     />
                     <SummaryCard
                         title="Total Expenses"
-                        value={`$${totalExpenses.toFixed(2)}`}
+                        value={`₹${totalExpenses.toFixed(2)}`}
                     />
                     <SummaryCard
                         title="Remaining Budget"
-                        value={`$${remainingBudget.toFixed(2)}`}
+                        value={`₹${remainingBudget.toFixed(2)}`}
                     />
                     <SummaryCard
                         title="Savings Rate"
