@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import SummaryCard from "./dashboard/SummaryCard";
+import TransactionCard from "./dashboard/TransactionCard";
+
+const STORAGE_KEY = "budget-matrix-transactions";
 
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
@@ -11,6 +15,27 @@ const Dashboard = () => {
   });
 
   const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    // Load saved transactions once when page opens.
+    const savedTransactions = localStorage.getItem(STORAGE_KEY);
+
+    if (savedTransactions) {
+      try {
+        const parsed = JSON.parse(savedTransactions);
+        if (Array.isArray(parsed)) {
+          setTransactions(parsed);
+        }
+      } catch (error) {
+        console.error("Failed to parse saved transactions:", error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    // Keep localStorage synced with latest transactions.
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+  }, [transactions]);
 
   let totalIncome = 0;
   let totalExpenses = 0;
@@ -25,7 +50,9 @@ const Dashboard = () => {
   const savingsRate =
     totalIncome === 0 ? 0 : Math.round((remainingBudget / totalIncome) * 100);
 
-  const handleAddTransaction = () => {
+  const handleAddTransaction = (e) => {
+    e.preventDefault();
+
     if (!trans.name || !trans.amount || !trans.category) return;
 
     const newTransaction = {
@@ -41,7 +68,7 @@ const Dashboard = () => {
       }),
     };
 
-    setTransactions([newTransaction, ...transactions]);
+    setTransactions((prev) => [newTransaction, ...prev]);
 
     setTrans({
       name: "",
@@ -51,108 +78,143 @@ const Dashboard = () => {
     });
   };
 
+  const handleDeleteTransaction = (id) => {
+    setTransactions((prev) =>
+      prev.filter((transaction) => transaction.id !== id),
+    );
+  };
+
   const filteredTransactions =
     filter === "All"
       ? transactions
       : transactions.filter((t) => t.type === filter.toLowerCase());
 
   return (
-    <div className="flex flex-col justify-start items-start bg-amber-50 h-screen font-gilroy">
-      <h1 className="text-3xl text-violet-400 self-start ml-5 mt-5 font-gilroy-bold underline">
-        Dashboard
-      </h1>
+    <div className="min-h-screen bg-linear-to-b from-amber-50 via-amber-50 to-violet-100 px-4 py-8 font-gilroy sm:px-8">
+      <div className="mx-auto max-w-6xl">
+        <h1 className="text-3xl font-gilroy-bold text-violet-500 underline sm:text-4xl">
+          Dashboard
+        </h1>
+        <p className="mt-5">
+          <span className="text-4xl font-bold text-violet-500">
+            Welcome back
+          </span>
+          <p className="mt-2 text-md font-semibold text-slate-600 sm:text-base">
+            Track income, expenses, and keep your budget under control.
+            <br />
+            Take a look at your transactions in a glance.
+          </p>
+        </p>
 
-      {/* SUMMARY */}
-      <div className="ml-10 mt-10 flex flex-col gap-3">
-        <div className="flex justify-between gap-10">
-          <h3 className="text-amber-600 font-bold text-2xl">Total Income</h3>
-          <h2 className="badge badge-dash p-4">{totalIncome}</h2>
-        </div>
+        {/* Summary cards */}
+        <section className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <SummaryCard
+            title="Total Income"
+            value={`$${totalIncome.toFixed(2)}`}
+          />
+          <SummaryCard
+            title="Total Expenses"
+            value={`$${totalExpenses.toFixed(2)}`}
+          />
+          <SummaryCard
+            title="Remaining Budget"
+            value={`$${remainingBudget.toFixed(2)}`}
+          />
+          <SummaryCard title="Savings Rate" value={`${savingsRate}%`} />
+        </section>
 
-        <div className="flex justify-between gap-10">
-          <h3 className="text-amber-600 font-bold text-2xl">Total Expenses</h3>
-          <h2 className="badge badge-dash p-4">{totalExpenses}</h2>
-        </div>
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          {/* Add transaction form */}
+          <section className="rounded-2xl border border-amber-200 bg-white/80 p-5 shadow-sm lg:col-span-1">
+            <h2 className="text-xl font-gilroy-bold text-amber-700">
+              Add Transaction
+            </h2>
 
-        <div className="flex justify-between gap-10">
-          <h3 className="text-amber-600 font-bold text-2xl">
-            Remaining Budget
-          </h3>
-          <h2 className="badge badge-dash p-4">{remainingBudget}</h2>
-        </div>
+            <form onSubmit={handleAddTransaction} className="mt-4 space-y-3">
+              <input
+                className="w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 outline-none transition focus:ring-2 focus:ring-violet-300"
+                placeholder="Transaction Name"
+                value={trans.name}
+                onChange={(e) => setTrans({ ...trans, name: e.target.value })}
+              />
 
-        <div className="flex justify-between gap-10">
-          <h3 className="text-amber-600 font-bold text-2xl">Savings Rate</h3>
-          <h2 className="badge badge-dash p-4">{savingsRate}%</h2>
-        </div>
-      </div>
+              <input
+                type="number"
+                className="w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 outline-none transition focus:ring-2 focus:ring-violet-300"
+                placeholder="Amount"
+                value={trans.amount}
+                onChange={(e) => setTrans({ ...trans, amount: e.target.value })}
+              />
 
-      {/* ADD TRANSACTION */}
-      <div>
-        <h2>Add Transaction</h2>
+              <select
+                className="w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 outline-none transition focus:ring-2 focus:ring-violet-300"
+                value={trans.type}
+                onChange={(e) => setTrans({ ...trans, type: e.target.value })}
+              >
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
 
-        <input
-          placeholder="Transaction Name"
-          value={trans.name}
-          onChange={(e) => setTrans({ ...trans, name: e.target.value })}
-        />
+              <input
+                className="w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 outline-none transition focus:ring-2 focus:ring-violet-300"
+                placeholder="Category (Food, Rent, Salary...)"
+                value={trans.category}
+                onChange={(e) =>
+                  setTrans({ ...trans, category: e.target.value })
+                }
+              />
 
-        <input
-          type="number"
-          placeholder="Amount"
-          value={trans.amount}
-          onChange={(e) => setTrans({ ...trans, amount: e.target.value })}
-        />
+              <button
+                type="submit"
+                className="cursor-pointer w-full rounded-xl bg-violet-500 px-4 py-2 font-gilroy-md text-white transition hover:bg-violet-600"
+              >
+                Add Transaction
+              </button>
+            </form>
+          </section>
 
-        <select
-          value={trans.type}
-          onChange={(e) => setTrans({ ...trans, type: e.target.value })}
-        >
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>
-        </select>
+          {/* Transactions list */}
+          <section className="rounded-2xl border border-amber-200 bg-white/80 p-5 shadow-sm lg:col-span-2">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-xl font-gilroy-bold text-amber-700">
+                Transactions
+              </h2>
 
-        {/* ✅ Category only for display */}
-        <input
-          placeholder="Category (e.g. Food, Rent)"
-          value={trans.category}
-          onChange={(e) => setTrans({ ...trans, category: e.target.value })}
-        />
-
-        <button onClick={handleAddTransaction}>Add Transaction</button>
-      </div>
-
-      {/* FILTER */}
-      <div>
-        {["All", "Income", "Expense"].map((type) => (
-          <button key={type} onClick={() => setFilter(type)}>
-            {type}
-          </button>
-        ))}
-      </div>
-
-      {/* TRANSACTIONS */}
-      <div>
-        <h2>Transactions</h2>
-
-        {filteredTransactions.length === 0 ? (
-          <p>No transactions</p>
-        ) : (
-          filteredTransactions.map((t) => (
-            <div key={t.id}>
-              <h4>{t.name}</h4>
-
-              <p>Category: {t.category}</p>
-
-              <p>{t.date}</p>
-
-              <p>
-                {t.type === "income" ? "+" : "-"}
-                {t.amount}
-              </p>
+              <div className="flex gap-2">
+                {["All", "Income", "Expense"].map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => setFilter(type)}
+                    className={`cursor-pointer rounded-lg border px-3 py-1 text-sm font-gilroy-md transition ${
+                      filter === type
+                        ? "border-violet-500 bg-violet-500 text-white"
+                        : "border-amber-200 bg-amber-50 text-slate-700 hover:bg-amber-100"
+                    }`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
             </div>
-          ))
-        )}
+
+            <div className="mt-4 space-y-3">
+              {filteredTransactions.length === 0 ? (
+                <p className="rounded-xl bg-amber-50 p-3 text-sm text-slate-500">
+                  No transactions found.
+                </p>
+              ) : (
+                filteredTransactions.map((transaction) => (
+                  <TransactionCard
+                    key={transaction.id}
+                    transaction={transaction}
+                    onDelete={handleDeleteTransaction}
+                  />
+                ))
+              )}
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );

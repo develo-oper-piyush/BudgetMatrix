@@ -1,9 +1,9 @@
 const Home = () => {
     return (
-        <div className="relative flex flex-col justify-center items-center font-gilroy-md text-charcoal bg-linear-to-t from-white to-violet-400 w-full min-h-screen p-10">
+        <div className="relative flex min-h-screen w-full flex-col items-center justify-center bg-linear-to-t from-white to-violet-400 p-10 font-gilroy-md text-charcoal select-text">
             {/* This below div is for the background setup using component*/}
-            <div className="absolute inset-0"></div>
-            <div className="relative z-10 flex justify-around">
+            <div className="pointer-events-none absolute inset-0"></div>
+            <div className="relative z-10 flex justify-around select-text">
                 <div className="w-full flex flex-col justify-center items-start">
                     <h2 className="text-5xl font-extrabold mr-2">
                         Budget <span className="text-violet-700">Matrix</span>
@@ -19,11 +19,11 @@ const Home = () => {
                         financial habits—all in one place.
                     </p>
                 </div>
-                <div className="w-[70%]">
+                <div className="w-[70%] pointer-events-none select-none">
                     <img src="/1.png" alt="" />
                 </div>
             </div>
-            <div className="mt-10 mb-10">
+            <div className="mt-10 mb-10 select-text">
                 <p className="text-4xl font-bold">
                     Clarity. Control. Confidence.
                 </p>
@@ -33,14 +33,14 @@ const Home = () => {
                     structured budgeting tools built for everyday use.
                 </p>
             </div>
-            <div className="relative flex flex-col justify-around items-center gap-4 mb-10">
+            <div className="relative mb-10 flex flex-col items-center justify-around gap-4 select-text">
                 <svg
                     width="100"
                     height="80"
                     viewBox="0 0 122 97"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute transform rotate-270 -bottom-10 -right-1"
+                    className="pointer-events-none absolute -bottom-10 -right-1 transform rotate-270"
                 >
                     <path
                         fill-rule="evenodd"
@@ -174,37 +174,58 @@ const Home = () => {
                 </div>
             </div>
 
-            <div>
-                <h1>How It Works</h1>
-                <h2>Simple Steps to Financial Awareness</h2>
-                <p>
+            <div className="mb-10 flex w-[50%] flex-col gap-1 select-text">
+                <h1 className="text-3xl font-extrabold">How It Works ?</h1>
+                <h2 className="text-xl font-semibold flex items-center gap-1">
+                    Simple Steps to Financial Awareness
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-arrow-right-icon lucide-arrow-right mt-1"
+                    >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </h2>
+                <p className="text-lg">
                     Start tracking your expenses in just a few steps and build
                     better financial habits over time.
                 </p>
-                <ul className="list-disc">
+                <ul className="list-disc ml-2 text-xl">
                     <li>Add your income and expenses</li>
                     <li>Categorize transactions</li>
                     <li>Monitor your dashboard </li>
                     <li>Adjust budgets based on insights</li>
                 </ul>
             </div>
-            <div>
-                <h1>Why Choose Budget Matrix</h1>
-                <p>
+            <div className="mb-10 flex w-[50%] flex-col gap-1 select-text">
+                <h1 className="text-3xl font-extrabold">
+                    Why Choose Budget Matrix
+                </h1>
+                <p className="text-lg">
                     Designed for simplicity and efficiency, Budget Matrix
                     empowers users to take full control of their finances
                     without complexity.
                 </p>
-                <ul className="list-disc">
+                <ul className="list-disc ml-2 text-xl">
                     <li>Clean and intuitive interface</li>
                     <li>Fast performance with minimal setup</li>
                     <li>Scalable for future financial features</li>
                 </ul>
             </div>
-            <div>
-                <h1>Call To Action</h1>
-                <h2>Start Managing Your Finances Today</h2>
-                <p>
+            <div className="select-text flex flex-col w-[50%]">
+                <h1 className="text-3xl font-extrabold">Call To Action</h1>
+                <h2 className="text-xl font-semibold flex items-center gap-1">
+                    Start Managing Your Finances Today
+                </h2>
+                <p className="text-lg">
                     Join Budget Matrix and take the first step toward financial
                     discipline and smarter money management.
                 </p>
@@ -215,7 +236,7 @@ const Home = () => {
                 viewBox="0 0 300 300"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute top-0 rotate-30 right-5"
+                className="pointer-events-none absolute right-5 top-0 rotate-30"
             >
                 <path
                     d="M37.149 167.26C33.2174 160.904 31.7143 153.342 32.9162 145.966L33.4836 142.484C34.8956 133.819 39.9157 126.159 47.2974 121.406L176.344 38.3134C187.473 31.1475 202.302 34.3448 209.49 45.4597L265.523 132.108C270.181 139.311 271.411 148.208 268.883 156.405C266.949 162.673 262.948 168.101 257.532 171.802L116.656 268.067C110.089 272.555 101.106 270.652 96.9218 263.888L37.149 167.26Z"
@@ -267,7 +288,7 @@ const Home = () => {
                 strokeWidth="1"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-violet-500 absolute left-10 bottom-0 cursor-pointer hover:scale-110 transition-all duration-300"
+                className="pointer-events-none absolute bottom-0 left-10 text-violet-500 transition-all duration-300 hover:scale-110"
             >
                 <path d="M13 5H19V11" />
                 <path d="M19 5L5 19" />
@@ -278,7 +299,7 @@ const Home = () => {
                 viewBox="0 0 300 300"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute top-15 right-150"
+                className="pointer-events-none absolute top-15 right-150"
             >
                 <path
                     d="M184.141 27.875L52.1984 117.269L59.0748 148.213L197.464 62.6872L202.192 49.364L184.141 27.875Z"
