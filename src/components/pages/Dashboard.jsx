@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SummaryCard from "./dashboard/SummaryCard";
 import TransactionCard from "./dashboard/TransactionCard";
 
 const STORAGE_KEY = "budget-matrix-transactions";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [transactions, setTransactions] = useState([]);
 
   const [trans, setTrans] = useState({
@@ -89,12 +91,25 @@ const Dashboard = () => {
       ? transactions
       : transactions.filter((t) => t.type === filter.toLowerCase());
 
+  const handleLogout = () => {
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-linear-to-b from-amber-50 via-amber-50 to-violet-100 px-4 py-8 font-gilroy sm:px-8">
       <div className="mx-auto max-w-6xl">
-        <h1 className="text-3xl font-gilroy-bold text-violet-500 underline sm:text-4xl">
-          Dashboard
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-gilroy-bold text-violet-500 underline sm:text-4xl">
+            Dashboard
+          </h1>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="cursor-pointer rounded-xl bg-rose-500 px-5 py-2 font-gilroy-md text-white transition hover:bg-rose-600"
+          >
+            Logout
+          </button>
+        </div>
         <p className="mt-5">
           <span className="text-4xl font-bold text-violet-500">
             Welcome back
