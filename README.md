@@ -112,3 +112,10 @@ npm run dev
 - This is a demo project, so the login credentials are fixed.
 - Transactions currently persist only in the browser through localStorage.
 - The app is built to stay simple and easy to understand.
+
+## Team Members
+
+- Piyush Chaudhary
+- Rishik Goel
+- Sahil
+- Sanyam
