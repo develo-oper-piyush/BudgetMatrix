@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="relative flex min-h-screen w-full flex-col items-center justify-center bg-linear-to-t from-white to-violet-400 p-10 font-gilroy-md text-charcoal select-text">
             {/* This below div is for the background setup using component*/}
@@ -18,6 +22,13 @@ const Home = () => {
                         manage budgets, and gain complete visibility into your
                         financial habits—all in one place.
                     </p>
+                    <button
+                        type="button"
+                        onClick={() => navigate("/login")}
+                        className="mt-6 cursor-pointer rounded-xl bg-violet-500 px-5 py-2.5 font-gilroy-md text-white transition hover:bg-violet-600"
+                    >
+                        Get Started
+                    </button>
                 </div>
                 <div className="w-[70%] pointer-events-none select-none">
                     <img src="/1.png" alt="" />
