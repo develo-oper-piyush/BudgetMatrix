@@ -4,7 +4,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="relative flex min-h-screen w-full flex-col items-center justify-center bg-linear-to-t from-white to-violet-400 p-10 font-gilroy-md text-charcoal select-text">
+        <div className="relative flex min-h-screen w-full flex-col items-center justify-center bg-linear-to-t from-amber-50 to-violet-400 p-10 font-gilroy-md text-charcoal select-text">
             {/* This below div is for the background setup using component*/}
             <div className="pointer-events-none absolute inset-0"></div>
             <div className="relative z-10 flex justify-around select-text">
@@ -25,7 +25,7 @@ const Home = () => {
                     <button
                         type="button"
                         onClick={() => navigate("/login")}
-                        className="mt-6 cursor-pointer rounded-xl bg-violet-500 px-5 py-2.5 font-gilroy-md text-white transition hover:bg-violet-600"
+                        className="mt-6 cursor-pointer rounded-xl bg-violet-500 px-5 py-2.5 font-gilroy-md text-white transition-all duration-300 hover:bg-violet-600 hover:ring-2 hover:shadow-md hover:shadow-amber-50 active:scale-90 hover:ring-amber-300 shadow-lg shadow-violet-500"
                     >
                         Get Started
                     </button>

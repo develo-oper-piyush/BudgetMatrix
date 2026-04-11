@@ -111,7 +111,7 @@ const Dashboard = () => {
                     <button
                         type="button"
                         onClick={handleLogout}
-                        className="cursor-pointer rounded-xl bg-rose-500 px-5 py-2 font-gilroy-md text-white transition hover:bg-rose-600"
+                        className="cursor-pointer rounded-xl bg-red-600 px-5 py-2 font-gilroy-md ring-red-800 ring-2 text-white transition hover:bg-rose-500 duration-300 hover:ring-2 hover:shadow-xl hover:shadow-red-200 active:scale-95 hover:ring-amber-500"
                     >
                         Logout
                     </button>
@@ -206,7 +206,7 @@ const Dashboard = () => {
 
                             <button
                                 type="submit"
-                                className="cursor-pointer w-full rounded-xl bg-violet-500 px-4 py-2 font-gilroy-md text-white transition hover:bg-violet-600"
+                                className="cursor-pointer w-full rounded-xl bg-violet-500 px-4 py-2 font-gilroy-md text-white transition hover:bg-violet-600 duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300"
                             >
                                 Add Transaction
                             </button>
@@ -238,7 +238,7 @@ const Dashboard = () => {
                                                 key={type}
                                                 type="button"
                                                 onClick={() => setFilter(type)}
-                                                className={`cursor-pointer rounded-lg border px-3 py-1 text-sm font-gilroy-md transition ${
+                                                className={`cursor-pointer rounded-lg border px-3 py-1 text-sm font-gilroy-md transition  duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300 ${
                                                     filter === type
                                                         ? "border-violet-500 bg-violet-500 text-white"
                                                         : "border-amber-200 bg-amber-50 text-slate-700 hover:bg-amber-100"
