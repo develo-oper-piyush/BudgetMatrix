@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const monthNames = [
 	"January",
@@ -18,17 +18,36 @@ const monthNames = [
 const currentYear = new Date().getFullYear();
 
 const MonthlyExpenses = () => {
-	const [monthlyExpenses, setMonthlyExpenses] = useState(
-		monthNames.map((month) => ({
-			month,
-			amount: "",
-		})),
-	);
+	const [monthlyExpenses, setMonthlyExpenses] = useState(() => {
+		const saved = localStorage.getItem("monthlyExpenses");
+		return saved
+			? JSON.parse(saved)
+			: monthNames.map((month) => ({
+					month,
+					amount: "",
+				}));
+	});
 	const [formData, setFormData] = useState({
 		month: monthNames[0],
 		amount: "",
 	});
-	const [threshold, setThreshold] = useState("");
+	const [threshold, setThreshold] = useState(() => {
+		const saved = localStorage.getItem("expenseThreshold");
+		return saved ? saved : "";
+	});
+
+	// Save monthlyExpenses to localStorage whenever it changes
+	useEffect(() => {
+		localStorage.setItem(
+			"monthlyExpenses",
+			JSON.stringify(monthlyExpenses),
+		);
+	}, [monthlyExpenses]);
+
+	// Save threshold to localStorage whenever it changes
+	useEffect(() => {
+		localStorage.setItem("expenseThreshold", threshold);
+	}, [threshold]);
 
 	const handleSaveExpense = (e) => {
 		e.preventDefault();
@@ -89,12 +108,13 @@ const MonthlyExpenses = () => {
 		});
 	}, [monthlyExpenses]);
 
-	const thresholdValue = threshold === "" ? null : Number(threshold);
+	const thresholdValue = threshold === "" ? null : parseFloat(threshold);
 
 	const thresholdAlerts = forecastedExpenses.filter(
 		(item) =>
 			item.status === "actual" &&
 			thresholdValue !== null &&
+			item.displayAmount !== null &&
 			item.displayAmount > thresholdValue,
 	);
 
@@ -206,7 +226,7 @@ const MonthlyExpenses = () => {
 
 							<button
 								type="submit"
-								className="cursor-pointer w-full rounded-xl bg-violet-500 px-4 py-2 font-gilroy-md text-white transition hover:bg-violet-600  duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300"
+								className="cursor-pointer w-full rounded-xl bg-violet-500 px-4 py-2 font-gilroy-md text-white transition hover:bg-violet-600  duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300 shadow-violet-300 shadow-md"
 							>
 								Save Expense
 							</button>

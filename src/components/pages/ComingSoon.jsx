@@ -116,7 +116,7 @@ const ComingSoon = () => {
 						></textarea>
 						<button
 							type="submit"
-							className="cursor-pointer rounded-xl bg-violet-500 px-5 py-2.5 font-gilroy-md text-white transition hover:bg-violet-600 duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300"
+							className="cursor-pointer rounded-xl bg-violet-500 px-5 py-2.5 font-gilroy-md text-white transition hover:bg-violet-600 duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300 shadow-violet-300 shadow-md"
 						>
 							Submit Suggestion
 						</button>
@@ -133,13 +133,13 @@ const ComingSoon = () => {
 				<div className="flex flex-wrap gap-3">
 					<NavLink
 						to="/dashboard"
-						className="cursor-pointer rounded-xl bg-violet-500 px-5 py-2.5 font-gilroy-md text-white transition hover:bg-violet-600 duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300"
+						className="cursor-pointer rounded-xl bg-violet-500 px-5 py-2.5 font-gilroy-md text-white transition hover:bg-violet-600 duration-300 hover:ring-2 hover:shadow-xl hover:shadow-amber-50 active:scale-95 hover:ring-amber-300 shadow-violet-300 shadow-md"
 					>
 						Go to Dashboard
 					</NavLink>
 					<NavLink
 						to="/home"
-						className="cursor-pointer rounded-xl border border-amber-200 bg-white px-5 py-2.5 font-gilroy-md text-slate-700 transition hover:bg-amber-50"
+						className="cursor-pointer rounded-xl border border-amber-200 bg-white px-5 py-2.5 font-gilroy-md text-slate-700 hover:bg-amber-50 transition-all active:scale-95 duration-300 shadow-md"
 					>
 						Back to Home
 					</NavLink>
