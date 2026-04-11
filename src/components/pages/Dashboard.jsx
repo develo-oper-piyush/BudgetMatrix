@@ -17,6 +17,7 @@ const Dashboard = () => {
     });
 
     const [filter, setFilter] = useState("All");
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         // Load saved transactions once when page opens.
@@ -88,10 +89,13 @@ const Dashboard = () => {
         );
     };
 
-    const filteredTransactions =
-        filter === "All"
-            ? transactions
-            : transactions.filter((t) => t.type === filter.toLowerCase());
+    const filteredTransactions = transactions
+        .filter((t) =>
+            filter === "All" ? true : t.type === filter.toLowerCase(),
+        )
+        .filter((t) =>
+            t.name.toLowerCase().includes(searchQuery.toLowerCase()),
+        );
 
     const handleLogout = () => {
         navigate("/");
@@ -216,21 +220,35 @@ const Dashboard = () => {
                                 Transactions
                             </h2>
 
-                            <div className="flex gap-2">
-                                {["All", "Income", "Expense"].map((type) => (
-                                    <button
-                                        key={type}
-                                        type="button"
-                                        onClick={() => setFilter(type)}
-                                        className={`cursor-pointer rounded-lg border px-3 py-1 text-sm font-gilroy-md transition ${
-                                            filter === type
-                                                ? "border-violet-500 bg-violet-500 text-white"
-                                                : "border-amber-200 bg-amber-50 text-slate-700 hover:bg-amber-100"
-                                        }`}
-                                    >
-                                        {type}
-                                    </button>
-                                ))}
+                            <div className="flex flex-wrap items-center gap-3">
+                                <input
+                                    type="text"
+                                    placeholder="Search by transaction name"
+                                    value={searchQuery}
+                                    onChange={(e) =>
+                                        setSearchQuery(e.target.value)
+                                    }
+                                    className="w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm outline-none transition focus:ring-2 focus:ring-violet-300 sm:w-64"
+                                />
+
+                                <div className="flex gap-2">
+                                    {["All", "Income", "Expense"].map(
+                                        (type) => (
+                                            <button
+                                                key={type}
+                                                type="button"
+                                                onClick={() => setFilter(type)}
+                                                className={`cursor-pointer rounded-lg border px-3 py-1 text-sm font-gilroy-md transition ${
+                                                    filter === type
+                                                        ? "border-violet-500 bg-violet-500 text-white"
+                                                        : "border-amber-200 bg-amber-50 text-slate-700 hover:bg-amber-100"
+                                                }`}
+                                            >
+                                                {type}
+                                            </button>
+                                        ),
+                                    )}
+                                </div>
                             </div>
                         </div>
 
