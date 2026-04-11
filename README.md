@@ -4,7 +4,7 @@ Budget Matrix is a simple expense tracking and budget management web app built w
 
 ## About The Project
 
-This project is designed to make money tracking easy and clear. Users can log transactions, filter them by type, remove unwanted entries, and review a clean dashboard with summary cards. The app also includes a login page for a demo sign-in flow and simple content pages for Home, About, and Contact.
+This project is designed to make money tracking easy and clear. Users can log transactions, filter them by type, remove unwanted entries, and review a clean dashboard with summary cards. The app also includes a login page for a demo sign-in flow and simple content pages for Home, About, Contact, and Coming Soon.
 
 The design uses a warm amber and violet theme with Tailwind CSS and keeps the UI clean, readable, and responsive.
 
@@ -17,6 +17,7 @@ The design uses a warm amber and violet theme with Tailwind CSS and keeps the UI
 - View total income, total expenses, remaining budget, and savings rate.
 - Demo login page with fixed username and password.
 - Logout button on the dashboard that returns the user to Home.
+- Coming Soon page for future feature ideas and suggestions.
 - Responsive pages with a consistent theme.
 - Footer links for company and legal pages.
 
@@ -57,6 +58,7 @@ BudgetMatrix/
 			├── Contact.jsx
 			├── Cookies.jsx
 			├── Dashboard.jsx
+			├── ComingSoon.jsx
 			├── Home.jsx
 			├── Login.jsx
 			├── Privacy.jsx
@@ -70,6 +72,7 @@ BudgetMatrix/
 - Dashboard: transaction manager with summary cards and filters.
 - About: project overview and purpose.
 - Contact: contact form and support information.
+- Coming Soon: future enhancement preview and feature suggestion form.
 - Terms, Privacy, Cookies: simple informational pages linked from the footer.
 
 ## Tech Stack
@@ -106,6 +109,10 @@ npm run dev
 - Add export and import for transaction data.
 - Add category-based analytics.
 - Add dark mode support.
+- Add AI-based bank statement upload and prediction features.
+- Add automatic transaction extraction from uploaded bank statements.
+- Add analytics dashboard for future spending trends.
+- Add feature voting or feedback tracking for user suggestions.
 
 ## Notes
 

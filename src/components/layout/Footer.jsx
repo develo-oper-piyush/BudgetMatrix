@@ -15,6 +15,7 @@ const Footer = (prop) => {
       links: [
         { label: "About Us", to: "/about" },
         { label: "Contact", to: "/contact" },
+        { label: "Coming Soon", to: "/coming-soon" },
       ],
     },
     {
